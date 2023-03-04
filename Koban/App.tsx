@@ -1,118 +1,155 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+import * as React from 'react';
+import { Text, View, Image, ImageBackground} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet } from 'react-native';
+const image = {uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/1987871-abstrato-preto-listras-diagonal-fundo-gratis-vetor.jpg'};
+function HomeScreen() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <ImageBackground source={image} resizeMode="cover">
+    <View style={styles.container}>
+      
+    
+      <Text style={styles.titulo}>Koban</Text>
+  
+  <View style={[
+      styles.container,
+      {
+        flexDirection: 'row',
+      },
+    ]}>
+  <Image source={require('./src/imagem/s10.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s15.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s16.jpg')} style={styles.produto}/>
+  </View>
+  <View style={[
+      styles.container,
+      {
+        flexDirection: 'row',
+      },
+    ]}>
+  <Image source={require('./src/imagem/s1.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s5.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s3.jpg')} style={styles.produto}/>
+  </View>
+  <View style={[
+      styles.container,
+      {
+       
+        flexDirection: 'row',
+      },
+    ]}>
+  <Image source={require('./src/imagem/s9.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s11.jpg')} style={styles.produto}/>
+  <Image source={require('./src/imagem/s12.jpg')} style={styles.produto}/>
+  </View>
+
+
+   
     </View>
+    </ImageBackground>
   );
 }
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function Pagamento(){
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ImageBackground source={image} resizeMode='cover'>
+    <View>
+      
+      <Text style={styles.titulo}>Pagamento</Text>
+      <View>
+            <Text style={styles.pag}>CREDITO</Text>
+            <Text style={styles.pag}>DEBITO</Text>
+            <Text style={styles.pag}>PIX</Text>
+            <Text style={styles.pag}>MASTERCARD</Text>
+            <Text style={styles.pag}>VISA</Text>
+            <Text style={styles.pag}>PIX</Text>
+      </View>
+      
+     
+     
+    </View>
+    </ImageBackground>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function Local(){
+  return (
+    <ImageBackground source={image} resizeMode='cover'>
+    <View style={{  justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={styles.pag}>Endereço: Av. São Camilo, 1081 - Vilarejo, Carapicuíba - SP, 06709-150</Text>
+      
+    </View> 
+    </ImageBackground>
+    
+  );
+}
 
-export default App;
+const Tab = createBottomTabNavigator();
+
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator >
+
+        <Tab.Screen
+         name="Inicio" 
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+         />
+
+        <Tab.Screen 
+        name="Pagamento" 
+        component={Pagamento}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="contactless-payment" color={color} size={size} />
+          ),
+        }}
+         />
+
+        <Tab.Screen
+         name="Local" 
+         component={Local}
+         options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="source-commit-local" color={color} size={size} />
+          ),
+        }}
+          />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+    padding:7,
+  },
+  titulo:{
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  produto:{
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    margin:15,
+    backgroundColor: 'white',
+  },
+  pag:{
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  
+});
